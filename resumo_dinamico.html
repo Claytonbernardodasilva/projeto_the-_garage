@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumo de Vendas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-3">📊 Resumo de Vendas</h1>
+        <h4 class="text-center mb-4">Mês: {{ mes }}/{{ ano }}</h4>
+
+        <!-- Produto mais vendido -->
+        <div class="card mb-4">
+            <div class="card-header bg-warning-subtle fw-bold">
+                🌟 Produto Mais Vendido - Última Semana
+            </div>
+            <div class="card-body">
+                {% if produto_semana %}
+                    <p><strong>{{ produto_semana[0] }}</strong> com <strong>{{ produto_semana[1] }}</strong> unidades vendidas entre {{ inicio_semana }} e {{ fim_semana }}.</p>
+                {% else %}
+                    <p class="text-muted">Nenhuma venda registrada na última semana do mês.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Top 5 -->
+        <div class="card">
+            <div class="card-header bg-info-subtle fw-bold">
+                📈 Top 5 Produtos do Mês
+            </div>
+            <div class="card-body">
+                {% if top5 %}
+                    <table class="table table-bordered table-striped text-center">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Posição</th>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in top5 %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ row[0] }}</td>
+                                    <td>{{ row[1] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p class="text-muted">Nenhuma venda registrada neste mês.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-secondary">🔄 Nova Consulta</a>
+        </div>
+    </div>
+
+</body>
+</html>
